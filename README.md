@@ -1,105 +1,66 @@
-# 🤖 Jarvis - Personal AI Assistant
+# Jarvis - Personal AI Assistant
 
-Build your own intelligent AI assistant powered by **self-hosted LLM**, **vector database**, and **conversational UI**!
+A personal AI assistant built with **self-hosted LLM**, **vector database**, and **conversational UI** for enterprise use.
 
-![Status](https://img.shields.io/badge/status-active-success.svg)
-![Python](https://img.shields.io/badge/python-3.9+-blue.svg)
+## Overview
 
-## 📋 Overview
+This project implements a complete RAG (Retrieval Augmented Generation) pipeline with:
+- **LLM**: HuggingFace Inference API (Flan-T5)
+- **Vector Database**: ChromaDB (local, no account required)
+- **Frontend**: Modern chatbot interface with real-time messaging
+- **Knowledge Base**: Semantic search through indexed documents
 
-Jarvis is a personal AI assistant that uses:
-- **🧠 LLM**: HuggingFace Inference API (Google Flan-T5 or LLaMA models)
-- **📚 Vector Database**: ChromaDB (local, no account required)
-- **🔍 RAG**: Retrieval Augmented Generation for contextual responses
-- **💬 Modern UI**: Beautiful, responsive chatbot interface
-
-## ✨ Features
-
-- ✅ Semantic search through knowledge base
-- ✅ Context-aware responses using RAG
-- ✅ Conversation history management
-- ✅ Add custom knowledge dynamically
-- ✅ Beautiful, animated UI
-- ✅ Real-time typing indicators
-- ✅ No external accounts required (except HuggingFace token)
-
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
-
-- Python 3.9 or higher
+- Python 3.9+
 - HuggingFace account (free) - [Sign up here](https://huggingface.co/join)
 
 ### Installation
 
-1. **Navigate to the project directory**
+1. **Clone the repository**
    ```bash
+   git clone https://github.com/khambampatibhavyasri/diligent-exam.git
    cd jarvis-assistant
    ```
 
-2. **Create a Python virtual environment**
+2. **Create virtual environment**
    ```bash
    python -m venv venv
+   .\venv\Scripts\activate  # Windows
    ```
 
-3. **Activate the virtual environment**
-   - Windows:
-     ```bash
-     .\venv\Scripts\activate
-     ```
-   - Mac/Linux:
-     ```bash
-     source venv/bin/activate
-     ```
-
-4. **Install dependencies**
+3. **Install dependencies**
    ```bash
    pip install -r backend/requirements.txt
    ```
 
-5. **Get your HuggingFace API token**
-   - Go to https://huggingface.co/settings/tokens
-   - Click "New token"
-   - Copy the token
-
-6. **Configure environment variables**
-   - Open `.env` file in the project root
-   - Add your HuggingFace token:
+4. **Configure environment**
+   - Get HuggingFace API token from https://huggingface.co/settings/tokens
+   - Open `.env` file and add your token:
      ```
      HUGGINGFACE_API_TOKEN=your_token_here
      ```
 
-### Running the Application
-
-1. **Start the backend server**
+5. **Start the backend server**
    ```bash
-   cd backend
-   python app.py
-   ```
-   
-   You should see:
-   ```
-   ==================================================
-    Jarvis AI Assistant API Server
-   ==================================================
-    Running on: http://localhost:5000
-   ==================================================
+   python backend/app.py
    ```
 
-2. **Open the frontend**
-   - Open `frontend/index.html` in your web browser
-   - Or use a simple HTTP server:
-     ```bash
-     cd frontend
-     python -m http.server 8000
-     ```
-   - Then navigate to `http://localhost:8000`
+6. **Open the frontend**
+   - Open `frontend/index.html` in your browser
 
-3. **Start chatting!**
-   - Type your questions in the chat interface
-   - Jarvis will use the knowledge base to provide contextual answers
+## Usage
 
-## 📁 Project Structure
+Once the server is running and frontend is open:
+1. Check that status shows "Online • 10 docs loaded"
+2. Type your questions in the chat interface
+3. Try asking:
+   - "What products do you offer?"
+   - "Do you offer a free trial?"
+   - "What programming languages do you support?"
+
+## Project Structure
 
 ```
 jarvis-assistant/
@@ -107,127 +68,58 @@ jarvis-assistant/
 │   ├── app.py              # Flask API server
 │   ├── llm_handler.py      # LLM integration
 │   ├── vector_db.py        # ChromaDB handler
-│   ├── rag_pipeline.py     # RAG pipeline
-│   └── requirements.txt    # Python dependencies
+│   └── rag_pipeline.py     # RAG pipeline
 ├── frontend/
-│   ├── index.html          # Chat interface
+│   ├── index.html          # Chatbot interface
 │   ├── style.css           # Styling
 │   └── script.js           # Frontend logic
 ├── data/
 │   └── knowledge_base.txt  # Sample knowledge
-├── .env                    # Configuration
-└── README.md              # This file
+└── README.md
 ```
 
-## 🎯 Usage
+## Technology Stack
 
-### Adding Custom Knowledge
+**Backend:**
+- Python, Flask
+- ChromaDB (vector database)
+- HuggingFace Inference API
+- Sentence Transformers (embeddings)
+- LangChain (RAG orchestration)
 
-**Option 1: Edit the knowledge file**
-- Edit `data/knowledge_base.txt`
-- Restart the backend server
+**Frontend:**
+- HTML/CSS/JavaScript
+- Modern UI with animations
+- Real-time API communication
 
-**Option 2: Use the API**
-```bash
-curl -X POST http://localhost:5000/api/add-knowledge \
-  -H "Content-Type: application/json" \
-  -d '{"text": "Your custom knowledge here"}'
-```
+## Features
 
-### API Endpoints
+- ✅ Semantic search through knowledge base
+- ✅ Context-aware responses using RAG
+- ✅ Conversation history management
+- ✅ Modern, responsive UI with animations
+- ✅ Real-time typing indicators
+- ✅ Local vector database (no cloud dependency)
+
+## API Endpoints
 
 - `GET /api/health` - Check server status
-- `POST /api/chat` - Send a message
-  ```json
-  {
-    "message": "What products do you offer?"
-  }
-  ```
-- `POST /api/add-knowledge` - Add knowledge
-  ```json
-  {
-    "text": "New knowledge",
-    "metadata": {"source": "custom"}
-  }
-  ```
+- `POST /api/chat` - Send message and get response
+- `POST /api/add-knowledge` - Add knowledge to database
 - `POST /api/clear-history` - Clear conversation history
 - `GET /api/stats` - Get system statistics
 
-## 🎨 Customization
+## Assignment Details
 
-### Change the LLM Model
+**Exercise:** Build Your Own Jarvis  
+**Tool:** Visual Studio, Co-pilot  
+**Duration:** 40 minutes  
+**Objective:** Design an AI-powered feature for a SaaS product
 
-Edit `.env`:
-```
-LLM_MODEL=meta-llama/Llama-2-7b-chat-hf
-```
+## License
 
-Available models:
-- `google/flan-t5-large` (default, fast)
-- `google/flan-t5-xl` (better quality, slower)
-- `meta-llama/Llama-2-7b-chat-hf` (requires approval)
-
-### Modify the UI
-
-- **Colors**: Edit `frontend/style.css` gradient values
-- **Fonts**: Change Google Fonts import in `frontend/index.html`
-- **Layout**: Modify HTML structure in `frontend/index.html`
-
-## 🔧 Troubleshooting
-
-**Issue**: `HUGGINGFACE_API_TOKEN not set`
-- **Solution**: Make sure you've added your token to the `.env` file
-
-**Issue**: `ModuleNotFoundError`
-- **Solution**: Activate virtual environment and run `pip install -r backend/requirements.txt`
-
-**Issue**: Backend server won't start
-- **Solution**: Check if port 5000 is already in use. Change port in `.env`:
-  ```
-  FLASK_PORT=5001
-  ```
-
-**Issue**: "Failed to get response" in UI
-- **Solution**: Make sure the backend server is running on `http://localhost:5000`
-
-**Issue**: Slow responses
-- **Solution**: Try a smaller/faster model like `google/flan-t5-base`
-
-## 📝 Technical Details
-
-### RAG Pipeline
-
-1. **User Query** → Embedding Generation
-2. **Vector Search** → Retrieve top 3 relevant documents from ChromaDB
-3. **Context Augmentation** → Combine query + context + history
-4. **LLM Generation** → Generate contextual response
-5. **Response** → Display to user
-
-### Technologies
-
-- **Backend**: Flask, LangChain, ChromaDB
-- **LLM**: HuggingFace Inference API
-- **Embeddings**: Sentence Transformers (all-MiniLM-L6-v2)
-- **Frontend**: Vanilla HTML/CSS/JavaScript
-- **Storage**: Local ChromaDB (persistent)
-
-## 🎓 Learning Resources
-
-- [LangChain Documentation](https://python.langchain.com/)
-- [ChromaDB Documentation](https://docs.trychroma.com/)
-- [HuggingFace Hub](https://huggingface.co/docs/hub/)
-- [RAG Explained](https://www.pinecone.io/learn/retrieval-augmented-generation/)
-
-## 📄 License
-
-This project is open source and available for educational purposes.
-
-## 🙏 Acknowledgments
-
-- Built as part of programming assignment
-- Uses open-source models and libraries
-- Inspired by enterprise AI assistants
+Educational project for programming assignment.
 
 ---
 
-**Made with ❤️ using Python, AI, and modern web technologies**
+**Built with** Python, AI, and modern web technologies
